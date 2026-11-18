@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Project Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <h2>🚀 TaskFlow</h2>
+
+        <nav>
+            <a class="active" href="#">Dashboard</a>
+            <a href="#tasks">My Tasks</a>
+            <a href="#tasks">Projects</a>
+        </nav>
+
+        <div class="profile">
+            <div class="avatar">K</div>
+            <div>
+                <strong>Admin User</strong>
+                <small>Project Manager</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back! Here's your project overview.</p>
+            </div>
+            <button onclick="openTaskForm()">+ Add Task</button>
+        </header>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span>Total Tasks</span>
+                <h2 id="totalTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>Pending</span>
+                <h2 id="pendingTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>In Progress</span>
+                <h2 id="progressTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>Completed</span>
+                <h2 id="completedTasks">0</h2>
+            </div>
+        </section>
+
+        <section class="task-section" id="tasks">
+
+            <div class="section-header">
+                <h2>My Tasks</h2>
+                <span>Manage your daily activities</span>
+            </div>
+
+            <div id="taskForm" class="task-form hidden">
+                <input id="taskTitle" placeholder="Enter task title">
+
+                <select id="taskPriority">
+                    <option value="Low">Low Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="High">High Priority</option>
+                </select>
+
+                <button onclick="addTask()">Save Task</button>
+            </div>
+
+            <div id="taskList" class="task-list"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
