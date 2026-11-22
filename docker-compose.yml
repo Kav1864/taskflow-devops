@@ -1,0 +1,48 @@
+services:
+  db:
+    container_name: taskflow-db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: taskflow
+      MYSQL_USER: taskflow_user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - taskflow-db-data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - taskflow-net
+
+  backend:
+    container_name: taskflow-backend
+    build: ./backend
+    image: taskflow-backend:v1
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: taskflow_user
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: taskflow
+    depends_on:
+      - db
+    networks:
+      - taskflow-net
+
+  frontend:
+    container_name: taskflow-frontend
+    build: ./frontend
+    image: taskflow-frontend:v1
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - taskflow-net
+
+networks:
+  taskflow-net:
+
+volumes:
+  taskflow-db-data:
+
